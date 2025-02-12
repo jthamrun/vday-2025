@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Will You Be My Valentine?</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Falling Objects Container -->
+    <div class="falling-objects"></div>
+
+    <!-- Basket -->
+    <div class="basket" id="basket"></div>
+
+    <!-- Main Content -->
+    <div class="container">
+      <h1>Will You Be My Valentine?</h1>
+      <p>
+        Collect <span id="petals-count">10</span> rose petals to reveal your
+        answer! 💖
+      </p>
+      <div class="buttons">
+        <button
+          class="button yes"
+          style="display: none"
+          onclick="alert('Yay! I love you! 💖')"
+        >
+          Yes!
+        </button>
+        <button class="button no" onclick="resetGame()">No</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

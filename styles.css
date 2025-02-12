@@ -1,0 +1,155 @@
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: linear-gradient(135deg, #ff7eb3, #ff758c);
+  font-family: "Arial", sans-serif;
+  overflow: hidden;
+  touch-action: none; /* Prevent touch zooming */
+}
+
+.container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px; /* Smaller padding for mobile */
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 2;
+  margin-top: 10px; /* Smaller margin for mobile */
+  width: 90%; /* Wider for mobile */
+  max-width: 400px;
+}
+
+h1 {
+  font-size: 1.5rem; /* Smaller font size for mobile */
+  color: #ff4d6d;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 1rem; /* Smaller font size for mobile */
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Smaller gap for mobile */
+}
+
+.button {
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  padding: 8px 16px; /* Smaller padding for mobile */
+  font-size: 0.9rem; /* Smaller font size for mobile */
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background: #ff1a40;
+}
+
+.button.no {
+  background: #ccc;
+  color: #333;
+}
+
+.button.no:hover {
+  background: #999;
+}
+
+/* Basket Styles */
+.basket {
+  position: absolute;
+  bottom: 20px;
+  width: 80px; /* Smaller basket for mobile */
+  height: 40px;
+  background: #8b4513;
+  border-radius: 10px 10px 50px 50px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 3;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.basket::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 8px;
+  width: 64px;
+  height: 16px;
+  background: #8b4513;
+  border-radius: 50%;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.basket::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 12px;
+  width: 56px;
+  height: 8px;
+  background: #a0522d;
+  border-radius: 50%;
+}
+
+/* Falling Objects Styles */
+.falling-objects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.petal,
+.enemy {
+  position: absolute;
+  width: 30px; /* Smaller size for mobile */
+  height: 30px;
+  animation: fall linear infinite;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px; /* Smaller font size for mobile */
+}
+
+.petal {
+  background: #ff4d6d;
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 50% 75%, 18% 100%, 0% 38%);
+}
+
+.enemy {
+  background: transparent;
+  font-size: 30px; /* Smaller font size for mobile */
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
