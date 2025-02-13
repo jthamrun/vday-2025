@@ -15,13 +15,13 @@ body {
 .container {
   text-align: center;
   background: rgba(255, 255, 255, 0.9);
-  padding: 15px; /* Smaller padding for mobile */
+  padding: 15px;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   position: relative;
   z-index: 2;
-  margin-top: 10px; /* Smaller margin for mobile */
-  width: 90%; /* Wider for mobile */
+  margin-top: 10px;
+  width: 90%;
   max-width: 400px;
 }
 
@@ -152,4 +152,49 @@ p {
     transform: translateY(110vh);
     opacity: 0;
   }
+}
+
+/* Popup Styles */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 4;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 90%; /* Ensure it doesn't overflow on mobile */
+  width: 300px; /* Smaller fixed width */
+}
+
+.popup-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.popup-content p {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.popup-content button {
+  background: #ff4d6d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
 }
