@@ -11,6 +11,7 @@ const loveNote = document.getElementById("love-note");
 let petalsCollected = 0;
 const totalPetalsNeeded = 10;
 let gamePaused = false; // Track if the game is paused
+let fallingObjects = []; // Track all falling objects
 
 // Memory Lane Data (Replace with your own photos and messages)
 const memoryLaneData = [
@@ -22,7 +23,7 @@ const memoryLaneData = [
   {
     photo: "photo2.jpg",
     caption: "My 23rd Birthday",
-    note: "You looked so beautiful with your short hair, and I can’t wait to see how beautiful you’ll be when you cut it again.",
+    note: "You looked so beautiful with your short hair, and I can’t wait to see how stunning you’ll be when you cut it again. You always take my breath away.",
   },
   {
     photo: "photo3.jpg",
@@ -32,7 +33,7 @@ const memoryLaneData = [
   {
     photo: "photo4.jpeg",
     caption: "First Photoshoot Together",
-    note: "This was just the beginning of our many photoshoots (at least 5 now!). Who knew we’d have so many beautiful memories captured together?",
+    note: "This was just the beginning of our many photoshoots. Who knew we’d have so many beautiful memories captured together? You make every picture perfect.",
   },
   {
     photo: "photo5.jpeg",
@@ -42,17 +43,17 @@ const memoryLaneData = [
   {
     photo: "photo6.jpeg",
     caption: "First Music Festival Together",
-    note: "I never thought I’d enjoy a music festival, but with you, even the loudest crowds feel peaceful.",
+    note: "I never thought I’d enjoy a music festival, but with you, even the loudest crowds feel peaceful. You make everything magical.",
   },
   {
     photo: "photo7.jpeg",
     caption: "First Time in Indo Together",
-    note: "Showing you my world was one of the most special moments of my life. I’ll always go the extra mile for you.",
+    note: "Showing you my world was one of the most special moments of my life. I’ll always go the extra mile to make you happy.",
   },
   {
     photo: "photo8.jpeg",
     caption: "Pre-wedding Photoshoot",
-    note: "'We're pretty, that's why 😂' - Jessica, 2025",
+    note: "You were right—we’re pretty, and that’s why! 😂 But more than that, we’re perfect together. I can’t wait for our forever.",
   },
   {
     photo: "photo9.jpeg",
@@ -62,7 +63,7 @@ const memoryLaneData = [
   {
     photo: "photo10.jpeg",
     caption: "Our First Trip Together - Just the Two of Us",
-    note: "So many ‘firsts’ with you, and I’m looking forward to countless more.",
+    note: "So many ‘firsts’ with you, and I’m looking forward to countless more. You make every journey unforgettable.",
   },
 ];
 
@@ -73,18 +74,29 @@ function showMemoryLane(index) {
   memoryCaption.innerHTML = `<strong>${memory.caption}</strong>`; // Bold the caption
   loveNote.textContent = memory.note;
   memoryLanePopup.style.display = "flex";
-  gamePaused = true; // Pause the game
-
-  // Automatically close the popup after 3 seconds
-  setTimeout(() => {
-    closePopup();
-  }, 3000);
+  pauseGame(); // Pause the game
 }
 
 // Function to close Memory Lane popup
 function closePopup() {
   memoryLanePopup.style.display = "none";
-  gamePaused = false; // Resume the game
+  resumeGame(); // Resume the game
+}
+
+// Function to pause the game
+function pauseGame() {
+  gamePaused = true;
+  fallingObjects.forEach((object) => {
+    object.style.animationPlayState = "paused"; // Pause all falling objects
+  });
+}
+
+// Function to resume the game
+function resumeGame() {
+  gamePaused = false;
+  fallingObjects.forEach((object) => {
+    object.style.animationPlayState = "running"; // Resume all falling objects
+  });
 }
 
 // Function to create a falling object (petal or enemy)
@@ -96,12 +108,15 @@ function createFallingObject(type) {
 
   if (type === "petal") {
     object.style.left = `${Math.random() * 100}%`;
-    object.style.animationDuration = `${Math.random() * 3 + 2}s`;
+    object.style.animationDuration = `${Math.random() * 5 + 5}s`; // Slower falling speed
   } else if (type === "enemy") {
     object.textContent = "💀";
     object.style.left = `${Math.random() * 100}%`;
-    object.style.animationDuration = `${Math.random() * 3 + 2}s`;
+    object.style.animationDuration = `${Math.random() * 5 + 5}s`; // Slower falling speed
   }
+
+  // Add the object to the tracking array
+  fallingObjects.push(object);
 
   // Check for collision with the basket
   const checkCollision = setInterval(() => {
@@ -128,6 +143,7 @@ function createFallingObject(type) {
       }
       object.remove();
       clearInterval(checkCollision);
+      fallingObjects = fallingObjects.filter((obj) => obj !== object); // Remove from tracking array
     }
   }, 100);
 
@@ -141,6 +157,7 @@ function resetGame() {
   petalsCountDisplay.textContent = totalPetalsNeeded;
   yesButton.style.display = "none";
   noButton.style.display = "inline-block";
+  fallingObjects = []; // Clear the tracking array
   startGame();
 }
 
